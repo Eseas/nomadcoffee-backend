@@ -5,7 +5,7 @@ import schema from "./schema";
 
 const PORT = process.env.PORT;
 const server = new ApolloServer({
-  schema
+  schema,
 });
 
 const app = express();
