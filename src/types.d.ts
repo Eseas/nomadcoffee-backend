@@ -9,6 +9,10 @@ export interface IUser {
   password: string;
   username: string;
   email: string;
+  folowers: User[];
+  folowing: User[];
+  totalFollowing: number,
+  totalFollowers: number,
   createAt: string;
   updatedAt: string;
 }
@@ -29,10 +33,14 @@ export type IArgs = {
   password: string;
   bio: string;
   avatar: IFile;
+  keyword: string;
+  lastId: number;
+  page: number;
 };
 
 export type Context = {
   loggedInUser?: User;
+  client: PrismaClient
 };
 
 export type Resolver = (

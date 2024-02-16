@@ -1,12 +1,15 @@
-import client from "../../client";
 import { Resolvers } from "../../types";
 
-const resolvers: Resolvers =  {
+const resolvers: Resolvers = {
     Query: {
-        seeProfile: (_, {username}) => client.user.findUnique({
+        seeProfile: (_, {username}, {client}) => client.user.findUnique({
             where: {
                 username,
             },
+            include: {
+                following: true,
+                followers: true,
+            }
         }),
     },
 };
