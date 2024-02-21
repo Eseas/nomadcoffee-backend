@@ -20,6 +20,7 @@ export default {
                 }
             }})
         },
+        totalShops: ({id}, _, {client}) => client.coffeeShop.count({where: {userId : id}}),
         isMe: ({id}, _, {loggedInUser}) => {
             if(!loggedInUser) {
                 return false;
@@ -53,6 +54,11 @@ export default {
                 },
             });
             return Boolean(exists);
-        }
+        },
+        shops: ({id}, {page}, {client}) => client.user.findMany({
+            where: {id},
+            take: 5,
+            skip: page,
+        })
     }
 }

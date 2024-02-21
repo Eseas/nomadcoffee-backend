@@ -2,22 +2,22 @@ import { Resolvers } from "../../types";
 
 const resolvers: Resolvers = {
     Query: {
-        searchUsers: async (_, {keyword, lastId}, {client}) => {
-            const aUsers = await client.user.findMany({where: { OR: [
-                {
-                    username: { startsWith: keyword.toLowerCase() } 
-                }, 
-                { 
-                    username: { contains: keyword.toLowerCase() } 
-                }]},
+        searchUsers: async (_, {keyword, page}, {client}) => {
+            const aUsers = await client.user.findMany({
+                where: {
+                  username: {
+                    startsWith: keyword.toLowerCase(),
+                  },
+                },
                 take: 5,
-                skip: 1,
-                ...(lastId && {cursor: {id:lastId}}),
+                skip: (page - 1) * 5
             });
-
+            const totalUsers = await client.user.count({
+                where: {username: {startsWith: keyword.toLowerCase()}},
+            });
             return {
-                ok:true,
-                users: aUsers,
+                Users: aUsers,
+                totalPages: Math.ceil(totalUsers / 5)
             };
         }
     }

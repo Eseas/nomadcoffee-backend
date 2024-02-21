@@ -42,9 +42,10 @@
         "@types/bcrypt": "^5.0.2",
         "@types/jsonwebtoken": "^9.0.5",
         "@types/morgan": "^1.9.9",
+        "@types/multer": "^1.4.11",
         "@typescript-eslint/eslint-plugin": "^6.19.0",
         "apollo-server-express": "^3.13.0",
-        "aws-sdk": "^2.1542.0",
+        "aws-sdk": "^2.1561.0",
         "bcrypt": "^5.1.1",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
@@ -56,11 +57,12 @@
         "graphql-ws": "^5.14.3",
         "jsonwebtoken": "^9.0.2",
         "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
         "ts-node": "^10.9.2",
         "ws": "^8.16.0"
-    }, 
+    },
     "resolutions": {
-        "**/**/fs-capacitor":"^6.2.0",
+        "**/**/fs-capacitor": "^6.2.0",
         "**/graphql-upload": "^11.0.0"
     }
 }

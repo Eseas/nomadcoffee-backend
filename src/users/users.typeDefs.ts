@@ -1,8 +1,8 @@
-import {gql} from "apollo-server-express"
+import { gql } from "apollo-server-express"
 
-export default gql `
+export default gql`
     type User {
-        id : String!
+        id : Int!
         firstName: String!
         lastName:String
         username:String!
@@ -15,6 +15,8 @@ export default gql `
         updatedAt: String!
         totalFollowing: Int!
         totalFollowers: Int!
+        shops: [CoffeeShop]
+        totalShops: Int!
         isFollowing: Boolean!
         isMe: Boolean!
     }

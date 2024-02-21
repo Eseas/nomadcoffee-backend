@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client';
+import { CoffeeShop, PrismaClient, User } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 export interface IUser {
@@ -11,11 +11,13 @@ export interface IUser {
   email: string;
   folowers: User[];
   folowing: User[];
-  totalFollowing: number,
-  totalFollowers: number,
+  totalFollowing: number;
+  totalFollowers: number;
+  shops: CoffeeShop;
   createAt: string;
   updatedAt: string;
 }
+
 export interface IFile {
   fieldName: string;
   filename: string;
@@ -27,13 +29,15 @@ export interface IFile {
 export type IArgs = {
   id: number;
   username: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   bio: string;
   avatar: IFile;
   keyword: string;
+  file: IFile;
+  categoryname: string;
   lastId: number;
   page: number;
 };
