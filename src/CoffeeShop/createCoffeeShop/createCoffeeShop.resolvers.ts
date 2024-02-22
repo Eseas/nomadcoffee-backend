@@ -24,19 +24,13 @@ export default {
               },
             },
             categories: {
-              connectOrCreate: {
-                where: {
-                    slug: 'nico-in-cafe',
-                },
-                create: {
-                    name: 'nico in cafe',
-                    slug: 'nico-in-cafe',
-                },
-            },
+              connectOrCreate: processCategories(category),
             }
           },
         });
-        console.log(NewCoffeeShop);
+
+        //console.log(NewCoffeeShop);
+
         if (CoffeeShopPhoto) {
           const fileUrl = await uploadToS3(CoffeeShopPhoto, loggedInUser.id, category);
           console.log(fileUrl)
