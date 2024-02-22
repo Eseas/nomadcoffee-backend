@@ -11,7 +11,7 @@ export default gql`
             name: String!
             latitude: String!
             logitude: String!
-            category: [String]!
+            category: String!
             CoffeeShopPhoto: [Upload]
         ): createCoffeeShopResult
     }

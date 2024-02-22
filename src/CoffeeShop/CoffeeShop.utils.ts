@@ -1,12 +1,9 @@
 export const processCategories = (caption) => {
-    const slug = caption
-    .match(/[^\s]+/g)
-    ?.join('-')
-    .toLowerCase() as string;
+    const slug = caption.match(/[^\s]+/g)?.join('-').toLowerCase() as string;
 
     return {
         where: {
-            name: caption
+            slug
         },
         create: {
             name: caption,

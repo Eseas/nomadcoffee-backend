@@ -2,30 +2,32 @@ import { Resolvers } from "../../types";
 import { protectedResolver } from "../../users/users.utils";
 import { processCategories } from "../CoffeeShop.utils";
 
-const resolvers : Resolvers = {
+export default {
     Mutation: {
         editCoffeeShop: protectedResolver(
             async(_,
-                {id, name, longitude, latitude, category},
+                {id, name, logitude, latitude, category},
                 {loggedInUser, client}
             ) => {
-                const existCoffeeShop = await client.CoffeeShop.findFirst({
+                console.log(id, name, logitude, latitude, category);
+                const existCoffeeShop = await client.CoffeeShop.findUnique({
                     where: {
                         id,
                     },
                     include: {
                         categories: {
                             select: {
-                                category: true,
+                                id: true,
                             }
                         }
                     }
                 });
-                if(existCoffeeShop.userId !== loggedInUser.id) {
+                
+                if(!existCoffeeShop) {
                     return {
-                        ok: false,
-                        error: "수정할 권한이 없습니다."
-                    }
+                        ok:false,
+                        error: "커피샵을 찾지 못했습니다.",
+                    };
                 }
 
                 const newCoffeeShop = await client.CoffeeShop.update({
@@ -34,20 +36,20 @@ const resolvers : Resolvers = {
                     },
                     data: {
                         name,
-                        longitude,
+                        logitude,
                         latitude,
-                        category: {
+                        ...(category && {
+                        categories: {
                             disconnect: existCoffeeShop.categories,
                             connectOrCreate: processCategories(category)
-                        }
+                        }}),
                     }
                 });
                 console.log(newCoffeeShop);
                 return {
                     ok: true,
-                    shop: newCoffeeShop,
                 };
             }
         )
     }
-}
+} as Resolvers;
