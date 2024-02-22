@@ -9,10 +9,6 @@ export default {
       async (_,
         { name, latitude, logitude, CoffeeShopPhoto, category },
         { loggedInUser, client }) => {
-          let CategoryObj = [];
-          if (category) {
-            CategoryObj = processCategories(category);
-          }
           //console.log(CategoryObj);
           //console.log(CoffeeShopPhoto);
           const NewCoffeeShop = await client.coffeeShop.create({
@@ -26,11 +22,9 @@ export default {
                   id: loggedInUser.id,
                 },
               },
-              ...(CategoryObj.length > 0 && {
-                categories: {
-                  connectOrCreate: CategoryObj,
-                }
-              }),
+              categories: {
+                  connectOrCreate: processCategories(category),
+                },
             }
           });
           //console.log(NewCoffeeShop);

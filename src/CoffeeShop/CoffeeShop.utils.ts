@@ -1,7 +1,16 @@
 export const processCategories = (caption) => {
-    const categories = caption.match(/ +/g) || [];
-    return categories.map((category) => ({
-        where: {category},
-        create: {category},
-    }));
+    const slug = caption
+    .match(/[^\s]+/g)
+    ?.join('-')
+    .toLowerCase() as string;
+
+    return {
+        where: {
+            name: caption
+        },
+        create: {
+            name: caption,
+            slug,
+        }
+    };
 }
