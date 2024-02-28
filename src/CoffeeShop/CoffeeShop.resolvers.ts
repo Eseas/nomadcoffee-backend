@@ -11,28 +11,29 @@ const resolvers: Resolvers = {
                     }
                 }
             }),  // End : photos
-        categories: ({id}, _, {client}) =>
-            client.category.findMany({
+        categories: ({id}, _, {client}) => {
+            console.log(id)
+            return client.category.findMany({
                 where: {
                     shops: {
                         some: {
-                            id,
+                            id: id,
                         },
                     },
                 },
-            })// End : categories
+            })
+        }// End : categories
     },
     Category: {
         totalShops: ({id}, _, {client}) =>{
             console.log(id);
-            return client.coffeeShop.count({where: {
-                categories: {
-                    some: {
+            return client.coffeeShop.count({
+                where: {
+                    categories: {
                         id,
-                    }
-                }
-            }});
-
+                    },
+                },
+            });
         },  // End: totalShops
     }
 }

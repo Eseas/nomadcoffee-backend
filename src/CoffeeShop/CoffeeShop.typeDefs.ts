@@ -15,7 +15,7 @@ export default gql`
         logitude:  String!
         user:       User!
         photos:     [CoffeeShopPhoto]
-        categories: [Category]
+        categories: Category
         createdAt: String!
         updatedAt: String!
     }

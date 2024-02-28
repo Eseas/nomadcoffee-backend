@@ -1,4 +1,4 @@
-import { CoffeeShop, PrismaClient, User } from '@prisma/client';
+import { Category, CoffeeShop, PrismaClient, User } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 export interface IUser {
@@ -14,6 +14,7 @@ export interface IUser {
   totalFollowing: number;
   totalFollowers: number;
   shops: CoffeeShop;
+  categoryId: number;
   createAt: string;
   updatedAt: string;
 }
